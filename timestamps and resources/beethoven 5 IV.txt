@@ -1,0 +1,57 @@
+exposition
+	24:39-25:04
+	theme 1: a martial and triumphant theme played by the whole orchestra
+	25:05-25:10
+	transition into theme 2
+	25:11-26:24
+	theme 2: consists of rising and falling groups of four notes
+	26:25-26:30
+	closing material for the exposition
+exposition repeat
+	26:31-26:56
+	repeat of the first theme
+	26:57-27:01
+	repeat of transition into theme 2
+	27:02-28:14
+	repeat of the second theme
+	28:15-28:21
+	repeat of the closing material for the exposition
+development
+	28:22-28:27
+	development part 1: continuation of the forward momentum from the exposition
+	28:28-28:49
+	part 2: the descending portion of the second theme is explored
+	28:50-28:56
+	part 3: strings continue playing the descending notes of theme 2, and the low strings start emerging to the music's surface
+	28:57-29:22
+	part 4: entry of the brass and timpani playing four notes, woodwinds playing a rising four-note motive from theme 2.
+	29:23-29:48
+	part 5: more embelishement from the material in part 4. the piccolo plays the rising four note motive from theme 2.
+	29:49-30:22
+	the haunting horn of hades motive from the third movement is restated, but in a hushed and weak way without any of its previous foreboding nature.
+recapitulation
+	30:23-30:49
+	restatement of the first theme
+	30:50-30:54
+	restatement of the transition material into theme two
+	30:55-31:39
+	restatement of the second theme
+ 	31:40-31:47
+	closing material for the recapitulation
+coda
+	31:48-32:10
+	coda part 1: strings and woodwinds play the descending part of theme 2, the orchestra soon joins
+	32:11-31:16
+	part 2: violins play a joyous embellishment
+	31:17-31:40
+	part 3: a motive derived from the second part of the first theme is heard three times
+	31:41-31:47
+	part 4: music becomes gradually faster and louder
+	31:48-32:33
+	part 5: momentum builds and more instruments join in
+	32:34-32:47
+	part 6: the brass join in the excitement
+	32:46-34:32
+	part 7: recall of theme 2, with embellishments from the piccolo, a final statement and then chords, lots of them.
+	
+	

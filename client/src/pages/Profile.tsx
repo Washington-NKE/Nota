@@ -34,7 +34,7 @@ export default function Profile() {
 
         <div className="flex flex-col gap-6">
           {pieces.map((piece) => (
-            <PieceCard key={piece._id} piece={piece} />
+            <PieceCard key={piece.id || piece._id} piece={piece} />
           ))}
         </div>
       </main>

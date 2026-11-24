@@ -1,0 +1,150 @@
+section one: exposition
+    part one: exposition - ritornello theme        
+        00:05-00:12
+        tutti: ritornello theme phase a
+        00:13-00:19
+        tutti: ritornello theme phrase b
+        00:20-00:25
+        tutti: ritornello theme phrase c
+        00:26-00:33
+        tutti: ritornello theme phrase d
+    part two
+        00:34-00:41
+        solo: elements of parts a and c
+    part three: exposition - gapped ritornello theme version 1        
+        00:42-00:48
+        tutti: ritornello phrase a
+        00:48-00:54
+        solo: elements from phrase b and c
+        00:54-00:57
+        tutti: phrase b's second half
+        00:58-01:06
+        solo: elements from phrase b and c
+        01:07-01:12
+        tutti: phrase b
+        01:13-01:17
+        tutti: prase c
+        01:18-01:21
+        tutti: first half of phrase d
+        01:21-01:26
+        solo: extension of phrase d
+        01:27-01:31
+        tutti: phrase d then a slight pause
+    part four: exposition - gapped ritornello them version 2	
+        01:32-01:33
+        tutti: only the openning of phrase a
+        01:35-01:40
+        solo: elements from phrase b and c
+        01:41-01:44
+        tutti: phrase a's second half
+        01:45-01:52
+        solo: elements of phrase b and c
+        01:53-01:59
+        tutti: phrase b
+        02:00-02:05
+        tutti: phrase c
+        02:06-02:07
+        tutti: phrase d's first half
+        02:08-02:12
+        solo: extension of phase d
+        02:13-02:17
+        tutti: phrase d's second half
+
+section two: development
+	part one
+		02:18-02:28
+		solo: plays elements drawn from b and c
+	part two
+		02:29-03:00
+		solo: plays harmony defining tremelos. this is the first time in the movement that no thematic material from the ritornello theme is heard.
+	part three: a gapped version of the ritornello theme's phrase a
+		03:01-03:06
+		tutti: phrase a
+		03:07-03:10
+		solo: elements from phrase b	
+		03:11-03:13
+		tutti: phrase a
+		03:14-03:18
+		solo: elements from phrase b
+		03:18-03:22
+		tutti: phrase a
+		03:23-03:30
+		tutti:phrase b
+		03:31-03:33
+		solo: very brief embelished elements from c
+	part three
+		03:34-04:04
+		solo: plays harmony defining motives drawn from c.
+		violins and cello accompaniment play phrase a in a long sequence
+	part five
+		04:05-04:20
+		solo: plays virtuosic, contrapuntal passsage, double stops and motives drawn from phrase a
+	part six
+		04:21-04:30
+		tutti: extention of phrase c
+		04:31-04:33
+		solo: ominous downward descent
+	part seven
+		04:33-04:40
+		solo: plays elements from phrase b and c
+		04:41-04:50
+		solo: plays harmony defining tremelos
+		04:51-04:57
+		solo: plays descent using elements from phrase c
+	part eight
+		04:58-05:11
+		tutti: extention of phrase d
+		05:12-05:36
+		solo: plays a climactic ascent and a brief but incredibly melancholy cadenze
+
+section three: recapitulation: a repeat of the exposition
+	part 1: exposition - ritornello theme
+        05:37-05:44
+        tutti: ritornello theme phase a
+        05:45-05:51
+        tutti: ritornello theme phrase b
+        05:52-05:57
+        tutti: ritornello theme phrase c
+        05:58-06:05
+        tutti: ritornello theme phrase d
+    part two: 
+        06:05-06:12
+        solo: elements of parts a and c
+	part three: exposition - gapped ritornello theme version 1
+        06:13-06:19
+        tutti: ritornello phrase a
+        06:20-06:25
+        solo: elements from phrase b and c
+        06:26-06:28
+        tutti: phrase b's second half
+        06:29-06:37
+        solo: elements from phrase b and c
+        06:38-06:43
+        tutti: phrase b 
+        06:44-06:48
+        tutti: phrase c
+        06:49-06:51
+        tutti: first half of phrase d
+        06:52-06:57
+        solo: extension of phrase d
+        06:58-07:02
+        tutti: phrase d then a slight pause
+	part four: exposition - gapped ritornello them version 2
+        07:03-07:04
+        tutti: only the openning of phrase a
+        07:05-07:11
+        solo: elements from phrase b and c
+        07:12-07:15
+        tutti: phrase a's second half
+        07:16-07:23
+        solo: elements of phrase b and c
+        07:24-07:30
+        tutti: phrase b
+        07:31-07:37
+        tutti: phrase c
+        07:38-07:39
+        tutti: phrase d's first half
+        07:40-07:44
+        solo: extension of phase d
+        07:45-04:49
+        tutti: phrase d's second half, and then some flourishing from Hilary Hahn :)

@@ -1,0 +1,53 @@
+exposition
+	00:05-00:14
+	first theme
+	00:15-00:29
+	transition into theme two
+	00:31-00:40
+	secod theme
+	00:41-00:58
+	transition into the end of the exposition
+	00:58-01:04
+	closing material for the exposition
+exposition repeat
+	01:05-01:13
+	first theme
+	01:14-01:30
+	transistion into theme two
+	01:31-01:40
+	second theme
+	01:41-01:58
+	transition into the end of the exposition
+	01:59-02:04
+	closing material for the exposition
+development
+	02:05-02:32
+	this is the development section: the two introduced during the exposition are further explored
+recapitulation
+	02:33-02:41
+	restatement of theme one
+	02:42-03:06
+	restatement of the transition into theme two, but elongated
+	03:07-03:17
+	restatemnt of the second theme
+	03:18-03:34
+	transition into the end of the recapitulation
+	03:34-03:41
+	closing material for the recapitulation
+development repeat
+	03:42-04:11
+	the two themes are developed
+recapitulation repeat
+	04:12-04:20
+	restatement of the first theme
+	04:21-04:45
+	restatement of the elangated transition into theme two
+	04:46-04:55
+	restatement of the second theme
+	04:56-05:13
+	transition into the end of the movement
+	05:14-05:20
+	closing material for the movement
+	
+	
+

@@ -12,6 +12,12 @@ enum AnnotationTrack {
   expert
 }
 
+enum UserRole {
+  listener
+  analyst
+  admin
+}
+
 /// Identity lives in Clerk, not here — this row is just a local FK anchor
 /// for SavedItem/Comment. `id` is Clerk's own user ID (no @default), and
 /// it's created lazily on first authenticated write (see piece.controller's
@@ -20,21 +26,24 @@ model User {
   id         String      @id
   name       String?
   email      String?
+  role       UserRole    @default(listener)
   createdAt  DateTime    @default(now())
   savedItems SavedItem[]
   comments   Comment[]
 }
 
 model Piece {
-  id         String      @id @default(uuid())
-  title      String
-  composer   String
-  year       Int?
-  coverUrl   String?
-  createdAt  DateTime    @default(now())
-  recordings Recording[]
-  scores     Score[]
-  savedItems SavedItem[]
+  id          String       @id @default(uuid())
+  title       String
+  composer    String
+  year        Int?
+  coverUrl    String?
+  createdAt   DateTime     @default(now())
+  recordings  Recording[]
+  scores      Score[]
+  savedItems  SavedItem[]
+  annotations Annotation[]
+  comments    Comment[]
 
   @@index([title])
   @@index([composer])
@@ -43,28 +52,98 @@ model Piece {
 /// Parsed MusicXML metadata for a piece. A piece can have more than one
 /// engraved score (e.g. different editions), though v1 assumes one.
 model Score {
-  id           String      @id @default(uuid())
-  pieceId      String
-  piece        Piece       @relation(fields: [pieceId], references: [id])
-  musicXmlUrl  String
-  measureCount Int
-  createdAt    DateTime    @default(now())
-  syncPoints   SyncPoint[]
+  id              String         @id @default(uuid())
+  pieceId         String
+  piece           Piece          @relation(fields: [pieceId], references: [id])
+  title           String?
+  versionLabel    String?
+  sourceFileName  String?
+  sourceFingerprint String?
+  isCanonical     Boolean        @default(false)
+  musicXmlUrl     String
+  musicXmlContent String?        @db.Text
+  measureCount    Int
+  createdAt       DateTime       @default(now())
+  syncPoints      SyncPoint[]
+  parts           ScorePart[]
+  measures        ScoreMeasure[]
+  synchronizationMaps SynchronizationMap[]
+  annotations     Annotation[]
+  recordings      Recording[]
+
+  @@index([pieceId, isCanonical])
+  @@index([sourceFingerprint])
+}
+
+model ScorePart {
+  id         String   @id @default(uuid())
+  scoreId    String
+  score      Score    @relation(fields: [scoreId], references: [id], onDelete: Cascade)
+  partId     String
+  name       String
+  instrument String?
+  createdAt  DateTime @default(now())
+  measures   ScoreMeasure[]
+
+  @@index([scoreId])
+}
+
+model ScoreMeasure {
+  id            String   @id @default(uuid())
+  scoreId       String
+  score         Score    @relation(fields: [scoreId], references: [id], onDelete: Cascade)
+  scorePartId   String?
+  scorePart     ScorePart? @relation(fields: [scorePartId], references: [id], onDelete: Cascade)
+  measureNumber Int
+  originalNumber String?
+  positionIndex Int       @default(0)
+  isPickup      Boolean   @default(false)
+  timeSignature String?
+  keyFifths     Int?
+  tempo         String?
+  noteCount     Int      @default(0)
+  restCount     Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@index([scoreId, measureNumber])
+  @@index([scoreId, scorePartId, positionIndex])
 }
 
 /// One performance of a piece, sourced from YouTube.
 model Recording {
-  id            String       @id @default(uuid())
-  pieceId       String
-  piece         Piece        @relation(fields: [pieceId], references: [id])
-  performer     String
-  year          Int?
-  provider      String       @default("youtube")
+  id             String       @id @default(uuid())
+  pieceId        String
+  piece          Piece        @relation(fields: [pieceId], references: [id])
+  scoreId        String?
+  score          Score?       @relation(fields: [scoreId], references: [id], onDelete: SetNull)
+  performer      String
+  year           Int?
+  provider       String       @default("youtube")
   youtubeVideoId String
-  createdAt     DateTime     @default(now())
-  syncPoints    SyncPoint[]
-  annotations   Annotation[]
-  comments      Comment[]
+  durationSec    Float?
+  createdAt      DateTime     @default(now())
+  syncPoints     SyncPoint[]
+  syncMap        SynchronizationMap?
+  annotations    Annotation[]
+  comments       Comment[]
+
+  @@index([pieceId])
+  @@index([scoreId])
+}
+
+model SynchronizationMap {
+  id          String      @id @default(uuid())
+  recordingId String      @unique
+  recording   Recording   @relation(fields: [recordingId], references: [id], onDelete: Cascade)
+  scoreId     String?
+  score       Score?      @relation(fields: [scoreId], references: [id], onDelete: SetNull)
+  isVerified  Boolean     @default(false)
+  validatedAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  anchors     SyncPoint[]
+
+  @@index([scoreId])
 }
 
 /// The core innovation: a human-authored anchor linking one measure of a
@@ -73,54 +152,87 @@ model Recording {
 model SyncPoint {
   id            String    @id @default(uuid())
   recordingId   String
-  recording     Recording @relation(fields: [recordingId], references: [id])
+  recording     Recording @relation(fields: [recordingId], references: [id], onDelete: Cascade)
+  synchronizationMapId String?
+  synchronizationMap SynchronizationMap? @relation(fields: [synchronizationMapId], references: [id], onDelete: Cascade)
   scoreId       String
-  score         Score     @relation(fields: [scoreId], references: [id])
+  score         Score     @relation(fields: [scoreId], references: [id], onDelete: Cascade)
   measureNumber Int
+  beatNumber    Float?
+  scorePosition Float?
   timestampSec  Float
+  confidence    Float?    @default(1.0)
+  source        String?   @default("manual")
   createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
 
   @@unique([recordingId, measureNumber])
   @@index([recordingId, timestampSec])
+  @@index([synchronizationMapId, timestampSec])
 }
 
-/// Explanation content keyed to a measure RANGE, not a timestamp — the
-/// SyncPoint table is what resolves "current timestamp" to "current
-/// measure" at playback time; this table never needs to know about time.
+/// Explanation content keyed to a measure RANGE or TIMESTAMP range.
 model Annotation {
-  id                String          @id @default(uuid())
-  recordingId       String
-  recording         Recording       @relation(fields: [recordingId], references: [id])
-  measureRangeStart Int
-  measureRangeEnd   Int
-  track             AnnotationTrack
-  text              String
-  createdAt         DateTime        @default(now())
+  id                 String          @id @default(uuid())
+  recordingId        String?
+  recording          Recording?      @relation(fields: [recordingId], references: [id], onDelete: Cascade)
+  scoreId            String?
+  score              Score?          @relation(fields: [scoreId], references: [id], onDelete: SetNull)
+  pieceId            String?
+  piece              Piece?          @relation(fields: [pieceId], references: [id], onDelete: Cascade)
+  measureRangeStart  Int?
+  measureRangeEnd    Int?
+  scorePositionStart Float?
+  scorePositionEnd   Float?
+  startTimestampSec  Float?
+  endTimestampSec    Float?
+  section            String?
+  subsection         String?
+  annotationType     String?
+  title              String?
+  track              AnnotationTrack
+  text               String          @db.Text
+  author             String?
+  sourceFingerprint  String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @default(now()) @updatedAt
 
   @@index([recordingId, measureRangeStart, measureRangeEnd])
+  @@index([recordingId, startTimestampSec, endTimestampSec])
+  @@index([pieceId, track])
 }
 
-/// Community annotation — secondary priority per the project's own
-/// scope ordering, kept simple: a timestamp/measure and a body.
+/// Community annotation — discussion, comment, or contextual question.
 model Comment {
   id            String    @id @default(uuid())
   userId        String
-  user          User      @relation(fields: [userId], references: [id])
-  recordingId   String
-  recording     Recording @relation(fields: [recordingId], references: [id])
-  timestampSec  Float
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recordingId   String?
+  recording     Recording? @relation(fields: [recordingId], references: [id], onDelete: Cascade)
+  pieceId       String?
+  piece         Piece?     @relation(fields: [pieceId], references: [id], onDelete: Cascade)
+  parentId      String?
+  parent        Comment?   @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       Comment[]  @relation("CommentReplies")
+  timestampSec  Float?
   measureNumber Int?
-  body          String
+  body          String     @db.Text
   createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
+
+  @@index([recordingId, timestampSec])
+  @@index([pieceId])
+  @@index([parentId])
 }
 
 model SavedItem {
   id        String   @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   pieceId   String
-  piece     Piece    @relation(fields: [pieceId], references: [id])
+  piece     Piece    @relation(fields: [pieceId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@unique([userId, pieceId])
+  @@index([userId])
 }

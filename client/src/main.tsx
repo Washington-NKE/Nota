@@ -26,4 +26,4 @@ ReactDOM.createRoot(rootElement).render(
       </BrowserRouter>
     </ClerkProvider>
   </React.StrictMode>
-);x
+);

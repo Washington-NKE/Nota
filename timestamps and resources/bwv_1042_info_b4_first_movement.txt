@@ -1,0 +1,10 @@
+Ritornello: From Italian ritornare, to return. A musical theme that recurs periodically during a piece, providing 
+structural unity; a refrain. Ritornello is a technical term in concerto writing for the simpler theme played by the
+ripieno or tutti, in contrast to the virtuosic writing for the soloists (Greenberg 1998).
+The retornello theme returns in segments, never in its entirety.
+
+Exposition: Usually the first part of a piece of music where all the musical ideas are presented
+
+Development: Follows the exposition. This is the secion where the introduced musical ideas are explored.
+
+Recapitulation: Follows the development. This is the section where the musical ideas introduced in the exposition return.

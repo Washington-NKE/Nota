@@ -1,0 +1,33 @@
+Phrase A
+	05:27-05:49
+	first part of the rondo theme
+	05:50-6:12
+	second part of the rondo theme, sounds very similar to the first part
+Phrase A repeat
+	06:13-06:35
+	repeat of the fisrt part of the rondo theme
+	06:35-06:57
+	repeat of the second part of the rondo theme
+Phrase B
+	06:58-07:21
+	first episode of the movement.
+Phrase A'
+	07:22-07:42
+	return to the second part of the rondo theme
+Phrase B
+	07:43-08:06
+	the first episode is repeated
+Phrase A'
+	08:07-08:29
+	return of the second part of the rondo theme
+Phrase C
+	08:30-09:18
+	the second episode of the movement
+Phrase A
+	09:19-09:40
+	return of the first part of the rondo theme
+	09:41-10:01
+	return of the second part of the rondo theme
+10:02-10:35
+	closing material for the movement
+		
